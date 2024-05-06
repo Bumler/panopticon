@@ -1,0 +1,1 @@
+export type SupportedValueType = "num" | "string" | "bool";
