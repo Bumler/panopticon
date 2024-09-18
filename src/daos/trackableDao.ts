@@ -1,5 +1,5 @@
-export interface Trackable {
-    trackableId: string,
+export interface TrackableDao {
+    id: string,
     activityId: string,
     userId: string,
     value: string,

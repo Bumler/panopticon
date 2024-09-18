@@ -1,38 +1,22 @@
 import { DynamoDB } from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { SupportedValueType } from '../daos/supportedValueType';
+import { SupportedValueType } from '../models/supportedValueType';
 import { SupportedActivityDao } from '../daos/supportedActivityDao';
 import { v4 as uuidv4 } from 'uuid';
+import { AbstractDynamoDbClient } from './AbstractDynamoDbClient';
 
 
-export class ActivityDynamoDBClient {
-    private dynamoDb: DynamoDB.DocumentClient;
-    private tableName: string;
+export class ActivityDynamoDBClient extends AbstractDynamoDbClient<SupportedActivityDao> {
+    protected tableName: string;
+    protected dynamoDb: DynamoDB.DocumentClient;
 
     constructor(tableName: string, dynamoDb: DocumentClient) {
+        super();
         this.dynamoDb = dynamoDb;
         this.tableName = tableName;
     }
 
-    // Method to add a new activity
-    public async addActivity(activityName: string, valueType: SupportedValueType): Promise<void> {
-        const activity: SupportedActivityDao = {
-            activityId: uuidv4(),
-            activityName: activityName,
-            valueType: valueType
-        };
-
-        const params = {
-            TableName: this.tableName,
-            Item: activity
-        };
-
-        try {
-            await this.dynamoDb.put(params).promise();
-            console.log('Activity added successfully:', activity);
-        } catch (error) {
-            console.error('Error adding activity:', error);
-            throw error;  // Re-throw to handle it in higher-level code
-        }
+    public async getActivity(id: string): Promise<SupportedActivityDao | null> {
+        return this.getRecord(id);
     }
 }

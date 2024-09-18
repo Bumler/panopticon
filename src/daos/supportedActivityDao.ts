@@ -1,7 +1,7 @@
-import { SupportedValueType } from "./supportedValueType";
+import { SupportedValueType } from "../models/supportedValueType";
 
 export interface SupportedActivityDao{
-    activityId: string,
+    id: string,
     activityName: string,
     valueType: SupportedValueType
 }

@@ -1,5 +1,5 @@
 export interface BingoTileDao {
-    bingoTileId: string,
+    id: string,
     completedTrackables: string[],
     completionTarget: number
     tileName: string

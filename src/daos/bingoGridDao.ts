@@ -1,5 +1,5 @@
 export interface BingoGridDao {
-    bingoGridId: string,
+    id: string,
     orderedTileIds: string[],
     userId: string
 }
