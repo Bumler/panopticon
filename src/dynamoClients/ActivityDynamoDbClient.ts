@@ -1,7 +1,7 @@
 import { DynamoDB } from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { SupportedValueType } from '../models/supportedValueType';
-import { SupportedActivity } from '../models/supportedActivity';
+import { SupportedValueType } from '../daos/supportedValueType';
+import { SupportedActivityDao } from '../daos/supportedActivityDao';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -16,7 +16,7 @@ export class ActivityDynamoDBClient {
 
     // Method to add a new activity
     public async addActivity(activityName: string, valueType: SupportedValueType): Promise<void> {
-        const activity: SupportedActivity = {
+        const activity: SupportedActivityDao = {
             activityId: uuidv4(),
             activityName: activityName,
             valueType: valueType

@@ -1,4 +1,5 @@
 export interface Trackable {
+    trackableId: string,
     activityId: string,
     userId: string,
     value: string,
